@@ -2,6 +2,7 @@ import socket
 import requests
 from weather import wUnderground
 from ircparameters import ircParamaters
+from elophantAPILibrary import ElophantLibrary
 
 server, serverport = "irc.freenode.net", 6667
 nick = "desgb0t"
@@ -11,6 +12,7 @@ ident = nick
 
 y = wUnderground('897522adf011af15')
 x = ircParamaters()
+z = ElophantLibrary("LERp7CeYSfOx8a1Xhk0Y")
 
 s = socket.socket()
 s.connect((server, serverport))
@@ -28,6 +30,19 @@ while True:
         if x.ircMsg(data)[0] == "get":
 
             if len(x.ircMsg(data)) >= 3:
+
+                if len(x.ircMsg(data)) >= 4:
+
+                    if x.ircMsg(data)[1] == 'elo':
+                        reigon = x.ircMsg(data)[2]
+                        summoner = x.ircMsg(data)[3]
+                        accountID = z.get_summoner(reigon, summoner)
+                        elo = z.get_player_stats(reigon, accountID, 'current') 
+
+                        s.send("PRIVMSG %s :%s[elo: %s]\r\n" % (channel, summoner, elo))
+
+                    else:
+                        pass
 
                 if x.ircMsg(data)[1] == "weather":
 

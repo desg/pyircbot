@@ -54,8 +54,8 @@ class ElophantLibrary():
 	
 	def get_player_stats(self, Reigon, AccountId, Season):
 		#The attributes for season are current , two, and one
-		return requests.get(self.Elophant + Reigon + "/player_stats/"
-			+ AccountId + "/" + Season, 
+		return requests.get(self.Elophant + str(Reigon) + "/player_stats/"
+			+ str(AccountId) + "/" + Season, 
 				params = {'key' : self.key}).json()
 				
 	def get_ranked_stats(self, Reigon, AccountId, Season):
