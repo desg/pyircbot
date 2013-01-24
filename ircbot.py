@@ -34,10 +34,10 @@ while True:
                 if len(x.ircMsg(data)) >= 4:
 
                     if x.ircMsg(data)[1] == 'elo':
-                        reigon = x.ircMsg(data)[2]
+                        region = x.ircMsg(data)[2]
                         summoner = x.ircMsg(data)[3]
-                        accountID = z.get_summoner(reigon, summoner)
-                        elo = z.get_player_stats(reigon, accountID, 'current') 
+                        accountID = z.get_summoner(region, summoner)
+                        elo = z.get_player_stats(region, accountID, 'current') 
 
                         s.send("PRIVMSG %s :%s[elo: %s]\r\n" % (channel, summoner, elo))
 
